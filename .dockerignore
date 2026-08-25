@@ -41,8 +41,10 @@ yolo*.pt
 # Runtime-State (kommt via Volume-Mount, nicht in den Image)
 data/
 
-# Tooling-Schrott
+# Local state of coding agents and dev tooling
 .dev-screenshots/
 .playwright-mcp/
 .claude/
+.cursor/
+.aider*
 *.log

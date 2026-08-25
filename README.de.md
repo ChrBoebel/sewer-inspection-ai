@@ -29,7 +29,7 @@ Freigabe vor — Objekterkennung als Vorfilter, Entscheidung beim Menschen.
 <sub>Die Screenshots zeigen das Modell <code>sewer-hybrid-review</code> auf
 Bildern des Datensatzes
 <a href="https://huggingface.co/datasets/SRuibo/Sewer-pipe-defects">SRuibo/Sewer-pipe-defects</a>
-(CC BY 4.0) — ein öffentlicher Datensatz, kein Betreibermaterial. Die Boxen sind
+(<a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, resized and assembled into a clip) — ein öffentlicher Datensatz, kein Betreibermaterial. Die Boxen sind
 echte Modellausgaben; die Gewichte dahinter gehören nicht zu diesem Repository
 (siehe <a href="DATA.md#interested-in-the-trained-weights">DATA.md</a>). Ohne
 eigene Gewichte läuft stattdessen der <code>placeholder</code>-Detektor.</sub>

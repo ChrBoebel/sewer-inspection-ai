@@ -28,7 +28,7 @@ the decision stays with the expert.
 
 <sub>Screenshots run the `sewer-hybrid-review` model over images from the
 <a href="https://huggingface.co/datasets/SRuibo/Sewer-pipe-defects">SRuibo/Sewer-pipe-defects</a>
-dataset (CC BY 4.0) — a public dataset, not operator footage. The boxes are real
+dataset (<a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, resized and assembled into a clip) — a public dataset, not operator footage. The boxes are real
 model output; the weights that produced them are not part of this repository
 (see <a href="DATA.md#interested-in-the-trained-weights">DATA.md</a>). Out of the
 box you get the <code>placeholder</code> detector instead.</sub>

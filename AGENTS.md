@@ -1,6 +1,7 @@
-# CLAUDE.md
+# AGENTS.md
 
-Guidance for Claude Code (claude.ai/code) when working in this repository.
+Guidance for coding agents working in this repository. Most agent tools read this
+file automatically; if yours does not, point it here.
 
 ## Project shape
 

@@ -57,7 +57,9 @@ frontend/.env.local
 frontend/next-env.d.ts
 frontend/tsconfig.tsbuildinfo
 
-# Agent-/Tooling-State
+# Local state of coding agents and dev tooling
 .claude/
+.cursor/
+.aider*
 .playwright-mcp/
 .dev-screenshots/
