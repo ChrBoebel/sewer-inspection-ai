@@ -26,9 +26,13 @@ Freigabe vor — Objekterkennung als Vorfilter, Entscheidung beim Menschen.
 </tr>
 </table>
 
-<sub>Die Screenshots zeigen den `placeholder`-Detektor auf synthetischem
-Testmaterial — echtes Inspektionsmaterial kommt in diesem Repository nirgends
-vor.</sub>
+<sub>Die Screenshots zeigen das Modell <code>sewer-hybrid-review</code> auf
+Bildern des Datensatzes
+<a href="https://huggingface.co/datasets/SRuibo/Sewer-pipe-defects">SRuibo/Sewer-pipe-defects</a>
+(CC BY 4.0) — ein öffentlicher Datensatz, kein Betreibermaterial. Die Boxen sind
+echte Modellausgaben; die Gewichte dahinter gehören nicht zu diesem Repository
+(siehe <a href="DATA.md#interested-in-the-trained-weights">DATA.md</a>). Ohne
+eigene Gewichte läuft stattdessen der <code>placeholder</code>-Detektor.</sub>
 
 **Was es kann**
 

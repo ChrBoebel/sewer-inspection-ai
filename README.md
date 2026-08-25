@@ -26,8 +26,12 @@ the decision stays with the expert.
 </tr>
 </table>
 
-<sub>Screenshots show the `placeholder` detector on synthetic test footage — no
-real inspection material is used anywhere in this repository.</sub>
+<sub>Screenshots run the `sewer-hybrid-review` model over images from the
+<a href="https://huggingface.co/datasets/SRuibo/Sewer-pipe-defects">SRuibo/Sewer-pipe-defects</a>
+dataset (CC BY 4.0) — a public dataset, not operator footage. The boxes are real
+model output; the weights that produced them are not part of this repository
+(see <a href="DATA.md#interested-in-the-trained-weights">DATA.md</a>). Out of the
+box you get the <code>placeholder</code> detector instead.</sub>
 
 **What it does**
 

@@ -46,8 +46,16 @@ is shipped with this repository; the scripts clone them at runtime:
 - **aussup / Pipeline-Defect-Image-Dataset** —
   <https://github.com/aussup/Pipeline-Defect-Image-Dataset>
 
-Check the license terms of these datasets at their source before using them,
-especially commercially. They are neither reviewed nor warranted here.
+The SRuibo dataset is published under **CC BY 4.0**. The screenshots in
+[`README.md`](README.md) show frames from it, used under that licence:
+
+> Images: [SRuibo/Sewer-pipe-defects](https://huggingface.co/datasets/SRuibo/Sewer-pipe-defects),
+> licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+> Resized and assembled into a short clip for demonstration; no other changes.
+
+The licence of the aussup dataset is not stated in its repository. Check the
+terms of any dataset at its source before using it, especially commercially.
+Nothing here is reviewed or warranted on your behalf.
 
 ## Other dependencies
 
