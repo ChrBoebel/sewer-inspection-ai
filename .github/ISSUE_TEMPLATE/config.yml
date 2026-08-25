@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/ChrBoebel/sewer-inspection-ai/security/advisories/new
+    about: Report privately, never as a public issue. See SECURITY.md.
+  - name: Commercial licence enquiry
+    url: https://github.com/ChrBoebel/sewer-inspection-ai/blob/main/COMMERCIAL.md
+    about: Proprietary or commercial use needs a separate licence.
+  - name: Access to the trained model weights
+    url: https://github.com/ChrBoebel/sewer-inspection-ai/blob/main/DATA.md#interested-in-the-trained-weights
+    about: The weights belong to the network operator — ask and I will forward it.

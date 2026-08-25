@@ -5,10 +5,10 @@ import { useEffect, useRef, useState, type ChangeEvent, type DragEvent } from 'r
 import type { Map as MapLibreMap, Marker as MapLibreMarker } from 'maplibre-gl'
 import type { Job, Video } from '@/lib/types'
 import type { Finding } from '@/lib/data'
-import { DN_OPTIONS, MAT_OPTIONS, type ArchiveEntry, type Stammdaten, type UploadLocationMetadata, type UploadMetadata } from '@/app/_lib/inspection-types'
-import { buildUploadMetadata, osmRasterStyle, parseDecimal, shortId } from '@/app/_lib/inspection-helpers'
-import { ArrowIcon, CheckIcon, ClipboardIcon, PlaySmallIcon, SmallXIcon, UploadIcon } from '@/app/_components/icons'
-import { ArtArchivRows, ArtHistogram, ArtStreetList, DashboardTile } from '@/app/_components/DashboardTiles'
+import { DN_OPTIONS, MAT_OPTIONS, type ArchiveEntry, type Stammdaten, type UploadLocationMetadata, type UploadMetadata } from '@/lib/inspection-types'
+import { buildUploadMetadata, osmRasterStyle, parseDecimal, shortId } from '@/lib/inspection-helpers'
+import { ArrowIcon, CheckIcon, ClipboardIcon, PlaySmallIcon, SmallXIcon, UploadIcon } from '@/components/icons'
+import { ArtArchivRows, ArtHistogram, ArtStreetList, DashboardTile } from '@/components/screens/DashboardTiles'
 
 function StammdatenModal({ onClose, onSubmit }: { onClose: () => void; onSubmit: (data: Stammdaten) => void }) {
   const today = new Date().toISOString().split('T')[0]

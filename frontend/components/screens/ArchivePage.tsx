@@ -3,10 +3,10 @@
 import { useMemo, useState, type CSSProperties } from 'react'
 import Level3Popup from '@/components/Level3Popup'
 import type { Finding, ValidationStatus } from '@/lib/data'
-import { DAMAGE, type ArchiveEntry } from '@/app/_lib/inspection-types'
-import { exportCSV, shortId, statusLabel } from '@/app/_lib/inspection-helpers'
-import { EmptyState } from '@/app/_components/Common'
-import { ArrowIcon, ArrowLeftIcon, CheckIcon, SearchIcon, XIcon } from '@/app/_components/icons'
+import { DAMAGE, type ArchiveEntry } from '@/lib/inspection-types'
+import { exportCSV, shortId, statusLabel } from '@/lib/inspection-helpers'
+import { EmptyState } from '@/components/Common'
+import { ArrowIcon, ArrowLeftIcon, CheckIcon, SearchIcon, XIcon } from '@/components/icons'
 
 type ArchivFilter = 'all' | 'accepted' | 'rejected'
 

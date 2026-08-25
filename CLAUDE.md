@@ -37,8 +37,8 @@ The repo deliberately avoids ports 3000/8000/6379 (frontend `13137`, backend
 bash scripts/dev-docker.sh         # backend+worker+redis in containers, frontend local
 bash scripts/stop-dev-docker.sh
 
-bash scripts/dev-unusual.sh        # everything local — needs Python venv, ffmpeg, tesseract
-bash scripts/stop-dev-unusual.sh
+bash scripts/dev-local.sh        # everything local — needs Python venv, ffmpeg, tesseract
+bash scripts/stop-dev-local.sh
 ```
 
 The Docker path is the low-friction default (`backend/Dockerfile` bakes in
@@ -79,7 +79,7 @@ Frontend (from `frontend/`):
 ```bash
 npm run lint          # eslint
 npm run typecheck     # tsc --noEmit
-npm run test          # vitest (unit tests in lib/*.test.ts, app/_lib/*.test.ts)
+npm run test          # vitest (unit tests in lib/*.test.ts)
 npm run e2e           # playwright; spins up a sync-mode backend itself
 ```
 
@@ -139,12 +139,12 @@ order — keep that in mind when comparing class indices.
 `frontend/app/page.tsx` is the central client component of the cockpit. A
 `ViewLevel = 0 | 1 | 2 | 3 | 4` switches between the screens (login/dashboard →
 order overview → review board → finding popup → archive/stats). The screens live
-in `frontend/app/_components/` (`LoginScreen`, `Dashboard`, `OrderOverview`,
+in `frontend/components/screens/` (`LoginScreen`, `Dashboard`, `OrderOverview`,
 `ReviewBoard`, `ArchivePage`, `StatsPage`), shared types and fixtures in
-`frontend/app/_lib/`, and reusable building blocks (`Badge`, `Btn`, `InspFrame`,
+`frontend/lib/`, and reusable building blocks (`Badge`, `Btn`, `InspFrame`,
 `VideoPopup`, `TopBar`, `Level3Popup`) in `frontend/components/`.
 
-`MODEL_ID` in `app/_lib/inspection-types.ts` decides which model the UI
+`MODEL_ID` in `lib/inspection-types.ts` decides which model the UI
 requests — default `placeholder`. WebSocket progress runs through
 `jobStreamUrl(jobId)`. The order overview embeds `VideoLocationMap`
 (maplibre-gl) and a `LocationEditor` drawer; markers reflect the
@@ -153,10 +153,10 @@ is `app/reports/[id]/page.tsx`. `lib/types.ts` mirrors
 `backend/app/schemas.py`; `lib/data.ts` holds fixture and taxonomy data.
 
 `NEXT_PUBLIC_API_BASE_URL` and `NEXT_PUBLIC_WS_BASE_URL` are required at build
-and run time — `dev-unusual.sh` points them at `127.0.0.1:18137`.
+and run time — `dev-local.sh` points them at `127.0.0.1:18137`.
 
 The login is a mock with no backend auth (plain-text fixture users in
-`app/_lib/inspection-types.ts`). Do not deploy without a real auth concept.
+`lib/inspection-types.ts`). Do not deploy without a real auth concept.
 
 ## License
 

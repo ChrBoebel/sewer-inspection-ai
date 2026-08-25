@@ -6,7 +6,7 @@ and personality rights.
 
 To brand the UI, replace `logo-placeholder.svg` and adjust the two usages:
 
-- `app/_components/LoginScreen.tsx`
+- `components/screens/LoginScreen.tsx`
 - `components/TopBar.tsx`
 
 The user avatar in `app/globals.css` (`.user-chip .avatar`) is a gradient with

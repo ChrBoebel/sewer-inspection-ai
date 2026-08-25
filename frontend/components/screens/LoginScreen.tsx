@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { useState, type FormEvent } from 'react'
-import { USERS, type User } from '@/app/_lib/inspection-types'
+import { USERS, type User } from '@/lib/inspection-types'
 
 export default function LoginScreen({ onLogin }: { onLogin: (user: User) => void }) {
   const [id, setId] = useState('MW-001')

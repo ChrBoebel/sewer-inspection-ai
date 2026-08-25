@@ -61,7 +61,7 @@ PIDs:
   Frontend: ${FRONTEND_PID}
 
 Press Ctrl+C to stop app processes, then run:
-  bash scripts/stop-dev-unusual.sh
+  bash scripts/stop-dev-local.sh
 EOF
 
 trap 'kill "$BACKEND_PID" "$WORKER_PID" "$FRONTEND_PID" 2>/dev/null || true' INT TERM EXIT

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter, IBM_Plex_Mono, JetBrains_Mono } from 'next/font/google'
-import { ErrorBoundary } from '@/components/atoms/ErrorBoundary'
+import { ErrorBoundary } from '@/components/ErrorBoundary'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import './globals.css'
 

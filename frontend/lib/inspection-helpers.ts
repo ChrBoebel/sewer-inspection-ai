@@ -2,7 +2,7 @@ import type { CSSProperties } from 'react'
 import type { StyleSpecification } from 'maplibre-gl'
 import type { DamageDetection, DamageEvent, Job, Video, VideoLocation } from '@/lib/types'
 import type { DamageClass, Finding, Street, ValidationStatus } from '@/lib/data'
-import { DAMAGE, KNOWN_CLASSES, MODEL_ID, type ArchiveEntry, type Stammdaten, type UploadLocationMetadata, type UploadMetadata } from '@/app/_lib/inspection-types'
+import { DAMAGE, KNOWN_CLASSES, MODEL_ID, type ArchiveEntry, type Stammdaten, type UploadLocationMetadata, type UploadMetadata } from '@/lib/inspection-types'
 
 export function videoToStreet(video: Video): Street {
   return {

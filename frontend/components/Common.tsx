@@ -1,7 +1,7 @@
 'use client'
 
 import type { Finding } from '@/lib/data'
-import { bboxStyle, modelColor } from '@/app/_lib/inspection-helpers'
+import { bboxStyle, modelColor } from '@/lib/inspection-helpers'
 
 export function SnapshotBoxes({ finding }: { finding: Finding }) {
   if (!finding.videoWidth || !finding.videoHeight) return null

@@ -1,7 +1,7 @@
 'use client'
 
 import type { ReactNode } from 'react'
-import { ArrowIcon } from '@/app/_components/icons'
+import { ArrowIcon } from '@/components/icons'
 
 export function DashboardTile({ title, value, label, art, onClick, children }: {
   title: string

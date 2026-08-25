@@ -1,5 +1,6 @@
 # Sewer Inspection AI
 
+[![CI](https://github.com/ChrBoebel/sewer-inspection-ai/actions/workflows/ci.yml/badge.svg)](https://github.com/ChrBoebel/sewer-inspection-ai/actions/workflows/ci.yml)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](LICENSE)
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/)
 [![Next.js 16](https://img.shields.io/badge/Next.js-16-black.svg)](https://nextjs.org/)
@@ -14,6 +15,20 @@ dieser Aufnahmen ist manuelle Fleißarbeit: stundenlang Video, um einzelne
 Sekunden mit Rissen, Wurzeleinwuchs oder Ablagerungen zu finden. Dieses Projekt
 automatisiert den ersten Durchgang und legt die Treffer einer Fachkraft zur
 Freigabe vor — Objekterkennung als Vorfilter, Entscheidung beim Menschen.
+
+![Review-Board](docs/screenshots/03-review-board.webp)
+
+<table>
+<tr>
+<td width="33%"><img src="docs/screenshots/01-dashboard.webp" alt="Dashboard"><br><sub><b>Dashboard</b> — offene Befunde, Upload, laufende Jobs</sub></td>
+<td width="33%"><img src="docs/screenshots/02-orders.webp" alt="Auftragsübersicht"><br><sub><b>Auftragsübersicht</b> — Inspektionen auf der Karte, Befunde je Auftrag</sub></td>
+<td width="33%"><img src="docs/screenshots/04-finding.webp" alt="Befunddetail"><br><sub><b>Befunddetail</b> — Frame, Box, Metadaten, bestätigen oder ablehnen</sub></td>
+</tr>
+</table>
+
+<sub>Die Screenshots zeigen den `placeholder`-Detektor auf synthetischem
+Testmaterial — echtes Inspektionsmaterial kommt in diesem Repository nirgends
+vor.</sub>
 
 **Was es kann**
 
@@ -52,6 +67,41 @@ mit WebSocket-Fortschritt in die UI.
 > Nutzung ist frei. Für proprietäre oder kommerzielle Nutzung brauchst du eine
 > Lizenz von mir — siehe [`COMMERCIAL.md`](COMMERCIAL.md) — und zusätzlich eine
 > Ultralytics Enterprise License ([`THIRD_PARTY.md`](THIRD_PARTY.md)).
+
+## Wie es funktioniert
+
+```mermaid
+flowchart LR
+    U[Upload<br/>MP4 / MPG] --> Q{Queue}
+    Q -->|APP_QUEUE_MODE=rq| R[(Redis + RQ)]
+    Q -->|APP_QUEUE_MODE=sync| W
+    R --> W[Worker]
+    W --> S[Frame-Sampling<br/>fps / stride / max]
+    S --> D[Detektor<br/>YOLO · ONNX · Placeholder]
+    D --> E[Event-Engine<br/>zu Befunden gruppieren]
+    E --> DB[(SQLite)]
+    E --> RP[JSON-Report]
+    W -.->|WebSocket-Fortschritt| UI[Review-Cockpit]
+    DB --> UI
+    RP --> UI
+
+    O[Overlay-OCR<br/>Straße · DN · Material] --> G[Geocoding<br/>Nominatim]
+    G --> UI
+```
+
+Jede Stufe ist einzeln austauschbar: der Detektor hinter dem
+`DamageDetector`-Protocol, die Queue hinter `enqueue_analysis_job`, die
+Persistenz hinter einer einzigen `Repository`-Klasse.
+
+### API-Dokumentation
+
+Das Backend ist FastAPI, das OpenAPI-Schema fällt also ab. Bei laufendem Stack:
+
+| | |
+| --- | --- |
+| Swagger UI | <http://127.0.0.1:18137/docs> |
+| ReDoc | <http://127.0.0.1:18137/redoc> |
+| OpenAPI JSON | <http://127.0.0.1:18137/openapi.json> |
 
 ## Ports
 
@@ -111,11 +161,11 @@ Braucht Python 3.12, Node 20+, `ffmpeg` und `tesseract` auf dem Host
 python3 -m venv .venv
 . .venv/bin/activate
 pip install -r backend/requirements.txt -r backend/requirements-dev.txt
-bash scripts/dev-unusual.sh
-bash scripts/stop-dev-unusual.sh
+bash scripts/dev-local.sh
+bash scripts/stop-dev-local.sh
 ```
 
-`dev-unusual.sh` nutzt `data/dev/` als Datenverzeichnis; Docker Compose nutzt
+`dev-local.sh` nutzt `data/dev/` als Datenverzeichnis; Docker Compose nutzt
 `./data/`.
 
 ### Einzelne Prozesse
@@ -212,7 +262,7 @@ Ein neues Modell hinzufügen = `ModelSpec` ergänzen und den `detector_type` in
 `frontend/app/page.tsx` ist die zentrale Client-Komponente. Ein
 `ViewLevel = 0 | 1 | 2 | 3 | 4` schaltet zwischen Login/Dashboard,
 Auftragsübersicht, Review-Board, Befund-Popup und Archiv/Statistik. Die
-Screens liegen in `frontend/app/_components/`, wiederverwendbare Bausteine in
+Screens liegen in `frontend/components/screens/`, wiederverwendbare Bausteine in
 `frontend/components/`, der API-Client in `lib/api.ts`, die Typen in
 `lib/types.ts` (spiegelt `backend/app/schemas.py`).
 
@@ -225,7 +275,7 @@ Laufzeit erforderlich.
 ### Demo-Login
 
 Das Login ist eine reine Attrappe: die Nutzer stehen als Klartext-Fixture in
-`frontend/app/_lib/inspection-types.ts` (Demo-Zugang `MW-001` / `123456`), es
+`frontend/lib/inspection-types.ts` (Demo-Zugang `MW-001` / `123456`), es
 gibt keine Authentifizierung im Backend. **Nicht ohne echtes Auth-Konzept
 deployen.**
 

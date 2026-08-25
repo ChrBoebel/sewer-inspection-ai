@@ -4,10 +4,10 @@ import maplibregl from 'maplibre-gl'
 import { useEffect, useRef, useState } from 'react'
 import type { Map as MapLibreMap, Marker as MapLibreMarker } from 'maplibre-gl'
 import type { Finding, Street } from '@/lib/data'
-import { DAMAGE, KNOWN_CLASSES } from '@/app/_lib/inspection-types'
-import { hasLocation, osmRasterStyle } from '@/app/_lib/inspection-helpers'
-import { EmptyState, StatBox } from '@/app/_components/Common'
-import { ArrowLeftIcon, ChevronRightIcon } from '@/app/_components/icons'
+import { DAMAGE, KNOWN_CLASSES } from '@/lib/inspection-types'
+import { hasLocation, osmRasterStyle } from '@/lib/inspection-helpers'
+import { EmptyState, StatBox } from '@/components/Common'
+import { ArrowLeftIcon, ChevronRightIcon } from '@/components/icons'
 
 const DAMAGE_CHART_COLORS: Record<Finding['ty'], string> = {
   connection_defect: '#0059FF',

@@ -5,10 +5,10 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import type { Map as MapLibreMap, Marker as MapLibreMarker } from 'maplibre-gl'
 import type { Video, VideoLocation, VideoLocationUpdate } from '@/lib/types'
 import type { Finding, Street } from '@/lib/data'
-import type { JobsByVideo } from '@/app/_lib/inspection-types'
-import { formatCoordinate, hasLocation, locationStatusLabel, osmRasterStyle, parseOptionalCoordinate, shortId } from '@/app/_lib/inspection-helpers'
-import { EmptyState } from '@/app/_components/Common'
-import { ArrowLeftIcon, ChevronRightIcon, PenIcon, PlaySmallIcon, SearchIcon, XIcon } from '@/app/_components/icons'
+import type { JobsByVideo } from '@/lib/inspection-types'
+import { formatCoordinate, hasLocation, locationStatusLabel, osmRasterStyle, parseOptionalCoordinate, shortId } from '@/lib/inspection-helpers'
+import { EmptyState } from '@/components/Common'
+import { ArrowLeftIcon, ChevronRightIcon, PenIcon, PlaySmallIcon, SearchIcon, XIcon } from '@/components/icons'
 
 export default function OrderOverview({
   streets,

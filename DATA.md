@@ -58,7 +58,7 @@ cp /path/to/last.pt data/models/sewer/yolo26s_finetune_640/last.pt
 pip install -r backend/requirements-ml.txt
 ```
 
-Then set `MODEL_ID` in `frontend/app/_lib/inspection-types.ts` to
+Then set `MODEL_ID` in `frontend/lib/inspection-types.ts` to
 `sewer-hybrid-review`, or pass `model_id` directly to
 `POST /api/videos/{id}/analyze`.
 

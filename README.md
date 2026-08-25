@@ -1,5 +1,6 @@
 # Sewer Inspection AI
 
+[![CI](https://github.com/ChrBoebel/sewer-inspection-ai/actions/workflows/ci.yml/badge.svg)](https://github.com/ChrBoebel/sewer-inspection-ai/actions/workflows/ci.yml)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](LICENSE)
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/)
 [![Next.js 16](https://img.shields.io/badge/Next.js-16-black.svg)](https://nextjs.org/)
@@ -14,6 +15,19 @@ is tedious manual work: hours of video to find the few seconds that actually
 show a crack, root intrusion, or deposit. This project automates the first pass
 and hands the hits to a human for approval — object detection as a pre-filter,
 the decision stays with the expert.
+
+![Review board](docs/screenshots/03-review-board.webp)
+
+<table>
+<tr>
+<td width="33%"><img src="docs/screenshots/01-dashboard.webp" alt="Dashboard"><br><sub><b>Dashboard</b> — open findings, upload, running jobs</sub></td>
+<td width="33%"><img src="docs/screenshots/02-orders.webp" alt="Order overview"><br><sub><b>Order overview</b> — inspections on a map, findings per order</sub></td>
+<td width="33%"><img src="docs/screenshots/04-finding.webp" alt="Finding detail"><br><sub><b>Finding detail</b> — frame, box, metadata, confirm or reject</sub></td>
+</tr>
+</table>
+
+<sub>Screenshots show the `placeholder` detector on synthetic test footage — no
+real inspection material is used anywhere in this repository.</sub>
 
 **What it does**
 
@@ -54,6 +68,42 @@ with WebSocket progress streamed to the UI.
 > is free. For proprietary or commercial use you need a license from me — see
 > [`COMMERCIAL.md`](COMMERCIAL.md) — plus an Ultralytics Enterprise License
 > ([`THIRD_PARTY.md`](THIRD_PARTY.md)).
+
+## How it works
+
+```mermaid
+flowchart LR
+    U[Upload<br/>MP4 / MPG] --> Q{Queue}
+    Q -->|APP_QUEUE_MODE=rq| R[(Redis + RQ)]
+    Q -->|APP_QUEUE_MODE=sync| W
+    R --> W[Worker]
+    W --> S[Frame sampling<br/>fps / stride / max]
+    S --> D[Detector<br/>YOLO · ONNX · placeholder]
+    D --> E[Event engine<br/>group into findings]
+    E --> DB[(SQLite)]
+    E --> RP[JSON report]
+    W -.->|WebSocket progress| UI[Review cockpit]
+    DB --> UI
+    RP --> UI
+
+    O[Camera overlay OCR<br/>street · DN · material] --> G[Geocoding<br/>Nominatim]
+    G --> UI
+```
+
+Each stage is replaceable on its own: the detector behind a `DamageDetector`
+protocol, the queue behind `enqueue_analysis_job`, the storage behind a single
+`Repository` class.
+
+### API documentation
+
+The backend is FastAPI, so the OpenAPI schema comes for free. With the stack
+running:
+
+| | |
+| --- | --- |
+| Swagger UI | <http://127.0.0.1:18137/docs> |
+| ReDoc | <http://127.0.0.1:18137/redoc> |
+| OpenAPI JSON | <http://127.0.0.1:18137/openapi.json> |
 
 ## Ports
 
@@ -113,11 +163,11 @@ Requires Python 3.12, Node 20+, and `ffmpeg` plus `tesseract` on the host
 python3 -m venv .venv
 . .venv/bin/activate
 pip install -r backend/requirements.txt -r backend/requirements-dev.txt
-bash scripts/dev-unusual.sh
-bash scripts/stop-dev-unusual.sh
+bash scripts/dev-local.sh
+bash scripts/stop-dev-local.sh
 ```
 
-`dev-unusual.sh` uses `data/dev/` as its data directory; Docker Compose uses
+`dev-local.sh` uses `data/dev/` as its data directory; Docker Compose uses
 `./data/`.
 
 ### Individual processes
@@ -214,7 +264,7 @@ Adding a model = add a `ModelSpec` and wire its `detector_type` into
 `frontend/app/page.tsx` is the central client component. A
 `ViewLevel = 0 | 1 | 2 | 3 | 4` switches between login/dashboard, order
 overview, review board, finding popup, and archive/stats. Screens live in
-`frontend/app/_components/`, reusable building blocks in
+`frontend/components/screens/`, reusable building blocks in
 `frontend/components/`, the API client in `lib/api.ts`, and the types in
 `lib/types.ts` (mirroring `backend/app/schemas.py`).
 
@@ -227,7 +277,7 @@ and run time.
 ### Demo login
 
 The login screen is a mock: users are a plain-text fixture in
-`frontend/app/_lib/inspection-types.ts` (demo access `MW-001` / `123456`) and
+`frontend/lib/inspection-types.ts` (demo access `MW-001` / `123456`) and
 there is no authentication in the backend. **Do not deploy this without a real
 auth concept.**
 

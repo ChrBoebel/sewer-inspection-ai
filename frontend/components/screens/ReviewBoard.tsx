@@ -4,10 +4,10 @@ import { useEffect, useState, type DragEvent } from 'react'
 import type { Job } from '@/lib/types'
 import type { Finding, Street, ValidationStatus } from '@/lib/data'
 import { mediaUrl } from '@/lib/api'
-import { DAMAGE, MODEL_ID } from '@/app/_lib/inspection-types'
-import { formatReminderShort, shortId } from '@/app/_lib/inspection-helpers'
-import { SnapshotBoxes } from '@/app/_components/Common'
-import { ArrowLeftIcon, BellIcon, CheckIcon, XIcon } from '@/app/_components/icons'
+import { DAMAGE, MODEL_ID } from '@/lib/inspection-types'
+import { formatReminderShort, shortId } from '@/lib/inspection-helpers'
+import { SnapshotBoxes } from '@/components/Common'
+import { ArrowLeftIcon, BellIcon, CheckIcon, XIcon } from '@/components/icons'
 
 const KIND_STATUS: Record<string, ValidationStatus> = {
   open: 'pending',

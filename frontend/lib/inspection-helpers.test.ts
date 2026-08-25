@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
-import { addMonthsIso, buildUploadMetadata, groupEventsToFindings, stammdatenToUploadMetadata } from '@/app/_lib/inspection-helpers'
-import type { Stammdaten } from '@/app/_lib/inspection-types'
+import { addMonthsIso, buildUploadMetadata, groupEventsToFindings, stammdatenToUploadMetadata } from '@/lib/inspection-helpers'
+import type { Stammdaten } from '@/lib/inspection-types'
 import type { DamageEvent, Video } from '@/lib/types'
 
 const baseStammdaten: Stammdaten = {
