@@ -1,0 +1,48 @@
+# Git/IDE/OS
+.git
+.gitattributes
+.vscode/
+.idea/
+.DS_Store
+
+# Python local
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+
+# Frontend (gehört nicht ins Backend-Image)
+frontend/
+node_modules/
+
+# Rohdaten (Videos) — siehe DATA.md
+*.MPG
+*.mpg
+*.mp4
+*.mov
+*.avi
+*.mkv
+
+# Trainings-Pakete & Datasets
+prepared_sewer_dataset/
+cloud_training/
+datasets/
+*.tar.gz
+
+# Andere Modell-Verzeichnisse, die das Default-Modell NICHT braucht
+models/
+runpod_results_finetune/
+runpod_results_finetune_v2/
+runs/detect/runs_finetune/
+runs/detect/runs_compare/
+yolo*.pt
+
+# Runtime-State (kommt via Volume-Mount, nicht in den Image)
+data/
+
+# Tooling-Schrott
+.dev-screenshots/
+.playwright-mcp/
+.claude/
+*.log

@@ -1,0 +1,62 @@
+services:
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "${REDIS_PORT:-16379}:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    image: sewer-inspection-ai-backend:dev
+    ports:
+      - "${BACKEND_PORT:-18137}:8000"
+    environment:
+      APP_QUEUE_MODE: rq
+      APP_DATA_DIR: /app/data
+      REDIS_URL: redis://redis:6379/0
+      APP_ANALYSIS_FRAME_STRIDE: "${APP_ANALYSIS_FRAME_STRIDE:-30}"
+      APP_ANALYSIS_MAX_FRAMES: "${APP_ANALYSIS_MAX_FRAMES:-0}"
+      APP_JOB_TIMEOUT_SECONDS: "${APP_JOB_TIMEOUT_SECONDS:-7200}"
+      APP_LOCATION_OCR_MAX_FRAMES: "${APP_LOCATION_OCR_MAX_FRAMES:-6}"
+      APP_ALLOWED_ORIGINS: "http://localhost:${FRONTEND_PORT:-13137},http://127.0.0.1:${FRONTEND_PORT:-13137}"
+      APP_PUBLIC_BASE_URL: "http://127.0.0.1:${BACKEND_PORT:-18137}"
+    volumes:
+      - ./backend:/app/backend
+      - ./data:/app/data
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+
+  worker:
+    image: sewer-inspection-ai-backend:dev
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    command: python -m app.worker
+    environment:
+      APP_QUEUE_MODE: rq
+      APP_DATA_DIR: /app/data
+      REDIS_URL: redis://redis:6379/0
+      APP_ANALYSIS_FRAME_STRIDE: "${APP_ANALYSIS_FRAME_STRIDE:-30}"
+      APP_ANALYSIS_MAX_FRAMES: "${APP_ANALYSIS_MAX_FRAMES:-0}"
+      APP_JOB_TIMEOUT_SECONDS: "${APP_JOB_TIMEOUT_SECONDS:-7200}"
+      APP_LOCATION_OCR_MAX_FRAMES: "${APP_LOCATION_OCR_MAX_FRAMES:-6}"
+      APP_WORKER_CLASS: simple
+    volumes:
+      - ./backend:/app/backend
+      - ./data:/app/data
+    depends_on:
+      redis:
+        condition: service_healthy
+    working_dir: /app
