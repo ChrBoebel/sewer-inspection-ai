@@ -13,6 +13,24 @@ The project was built with footage from a sewer network operator. That material,
 and everything derived from it, belongs to the operator and is not published
 here.
 
+## Interested in the trained weights?
+
+The checkpoints trained on that footage are not published, because they are
+derived from data I do not own. That does not mean the door is closed.
+
+If you have a concrete use case — research, a pilot with your own network, an
+evaluation — **get in touch: [@ChrBoebel](https://github.com/ChrBoebel)**, an
+issue in this repository works fine. I will put the question to the network
+operator; releasing the weights is their call, not mine, and I would rather ask
+them on your behalf than have you guess who to contact.
+
+Tell me what you want to do with them and in what context. Note that a release
+would also have to work within the Ultralytics AGPL terms — see
+[`THIRD_PARTY.md`](THIRD_PARTY.md).
+
+If you have your own inspection footage, the section below gets you running
+without any of this.
+
 ## Running without weights
 
 The default is the `placeholder` detector: deterministic demo boxes, no ML

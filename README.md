@@ -45,6 +45,10 @@ with WebSocket progress streamed to the UI.
 > trained weights. The default detector is the `placeholder` — the app runs
 > fully, it just does not detect anything real. See [`DATA.md`](DATA.md) for how
 > to plug in your own weights.
+>
+> Interested in the weights trained on real inspection footage? They belong to
+> the network operator, not to me — but ask and I will take the question to
+> them. [`DATA.md`](DATA.md#interested-in-the-trained-weights) has the details.
 
 > **Licensing.** AGPL-3.0, because Ultralytics YOLO is AGPL-3.0. Open source use
 > is free. For proprietary or commercial use you need a license from me — see

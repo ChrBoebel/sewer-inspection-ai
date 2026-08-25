@@ -48,7 +48,7 @@ WORKER_PID=$!
 FRONTEND_PID=$!
 
 cat <<EOF
-Started Sewer inspection stack:
+Started Sewer Inspection AI stack:
   Frontend: http://127.0.0.1:${FRONTEND_PORT}
   Backend:  http://127.0.0.1:${BACKEND_PORT}/api/health
   Redis:    redis://localhost:${REDIS_PORT}/0

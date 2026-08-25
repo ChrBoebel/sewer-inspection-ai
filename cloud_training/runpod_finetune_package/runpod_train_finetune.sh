@@ -3,7 +3,7 @@ set -euo pipefail
 
 cd "$(dirname "$0")"
 
-echo "== RunPod Sewer basemodel finetune =="
+echo "== RunPod in-domain base-model finetune =="
 date
 pwd
 

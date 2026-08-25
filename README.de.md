@@ -42,6 +42,11 @@ mit WebSocket-Fortschritt in die UI.
 > Betreiber-Stammdaten oder trainierte Gewichte. Der Default-Detektor ist der
 > `placeholder` — die App läuft damit vollständig, erkennt aber nichts Echtes.
 > Wie du eigene Gewichte einhängst: [`DATA.md`](DATA.md).
+>
+> Interesse an den Gewichten, die auf echtem Inspektionsmaterial trainiert
+> wurden? Die gehören dem Netzbetreiber, nicht mir — frag trotzdem, ich trage
+> die Anfrage weiter. Details in
+> [`DATA.md`](DATA.md#interested-in-the-trained-weights).
 
 > **Lizenz-Hinweis.** AGPL-3.0, weil Ultralytics YOLO AGPL-3.0 ist. Open-Source-
 > Nutzung ist frei. Für proprietäre oder kommerzielle Nutzung brauchst du eine

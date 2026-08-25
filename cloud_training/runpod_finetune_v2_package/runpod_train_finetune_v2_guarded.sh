@@ -3,7 +3,7 @@ set -euo pipefail
 
 cd "$(dirname "$0")"
 
-echo "== RunPod Sewer guarded finetune v2 =="
+echo "== RunPod in-domain guarded finetune v2 =="
 date
 pwd
 
@@ -164,7 +164,7 @@ run_train() {
     name="${name}_test_eval" \
     2>&1 | tee "test_${name}.log"
 
-  echo "== Predict clean Sewer frames for $name =="
+  echo "== Predict clean in-domain frames for $name =="
   yolo predict \
     model="$best" \
     source=prepared_sewer_dataset/review_clean_v2/frames/ml_clean_v2_safe \
@@ -178,7 +178,7 @@ run_train() {
     name="${name}_predict_clean" \
     2>&1 | tee "predict_clean_${name}.log"
 
-  echo "== Predict background Sewer frames for $name =="
+  echo "== Predict background in-domain frames for $name =="
   yolo predict \
     model="$best" \
     source=prepared_sewer_dataset/review_clean_v2/frames/background_v2_safe \

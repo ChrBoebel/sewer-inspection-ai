@@ -65,7 +65,7 @@ Per class:
 
 ## Critical Assessment
 
-This is a useful external pretraining model, not a final Sewer sewer-inspection model.
+This is a useful external pretraining model, not a final in-domain sewer-inspection model.
 
 Strong points:
 
@@ -80,14 +80,14 @@ Weak points:
 - `joint_fault` is weak on test: recall 0.379 and mAP50-95 0.189.
 - `obstruction_or_other` remains broad and visually heterogeneous. It is expected to be unstable.
 - The confusion matrices show many ground-truth objects falling into background, meaning missed detections are still the main problem.
-- This model was trained on external SRuibo data, not the curated Sewer dataset. Domain transfer to Sewer must be tested visually.
+- This model was trained on external SRuibo data, not the curated in-domain dataset. Domain transfer to in-domain footage must be tested visually.
 
 ## Recommendation
 
 Use this `best.pt` as:
 
 - external pretraining / bootstrap detector
-- candidate proposal generator on Sewer ML-clean frames
+- candidate proposal generator on in-domain ML-clean frames
 - smoke-test model for the pipeline
 
 Do not present it as a final production-quality sewer damage detector yet.
@@ -95,7 +95,7 @@ Do not present it as a final production-quality sewer damage detector yet.
 Next steps:
 
 1. Stop the idle RunPod once results are confirmed locally.
-2. Run predictions on Sewer ML-clean frames.
+2. Run predictions on in-domain ML-clean frames.
 3. Review false positives and false negatives visually.
-4. Add expert-confirmed Sewer boxes, especially `joint_fault`, `deposit`, and `connection_defect`.
-5. Fine-tune on a stronger Sewer train/val/test split only after enough real labels exist.
+4. Add expert-confirmed in-domain boxes, especially `joint_fault`, `deposit`, and `connection_defect`.
+5. Fine-tune on a stronger in-domain train/val/test split only after enough real labels exist.
