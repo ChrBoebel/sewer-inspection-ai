@@ -1,6 +1,6 @@
 'use client'
 
-import maplibregl from 'maplibre-gl'
+import * as maplibregl from 'maplibre-gl'
 import { useEffect, useRef, useState } from 'react'
 import type { Map as MapLibreMap, Marker as MapLibreMarker } from 'maplibre-gl'
 import type { Finding, Street } from '@/lib/data'
